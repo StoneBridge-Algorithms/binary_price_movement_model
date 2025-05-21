@@ -1,7 +1,7 @@
 import yfinance as yf
 import pandas as pd
 
-def load_price_data(ticker="AAPL", period="10y", interval="1d"):
+def load_price_data(ticker, period="10y", interval="1d"):
     try:
         df = yf.download(ticker, period=period, interval=interval, threads=False)
     except Exception as e:

@@ -1,6 +1,6 @@
 import pandas as pd
 import joblib
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
@@ -17,7 +17,7 @@ def train_logistic_model(df, model_path="models/trained_model.pkl"):
     y_train, y_test = y.iloc[:split_idx], y.iloc[split_idx:]
 
     # Train model
-    model = LogisticRegression(max_iter=1000)
+    model = RandomForestClassifier(n_estimators=100, max_depth=5)
     model.fit(X_train, y_train)
 
     # Predict & evaluate
@@ -28,7 +28,4 @@ def train_logistic_model(df, model_path="models/trained_model.pkl"):
     print("\nClassification Report:\n", classification_report(y_test, y_pred))
 
     # Save model
-    joblib.dump(model, model_path)
-    print(f"\n✅ Model saved to {model_path}")
-
     return model
